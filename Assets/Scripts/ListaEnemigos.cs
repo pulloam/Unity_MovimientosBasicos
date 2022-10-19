@@ -16,7 +16,7 @@ public class ListaEnemigos : MonoBehaviour{
     void Update(){
         tiempoUnSegundo += Time.deltaTime;
         if(tiempoUnSegundo >= 1) {
-            int posicionEnemigo = Random.Range(-13, 12);
+            int posicionEnemigo = Random.Range(-16, 12);
             Instantiate(enemigo).transform.position = new Vector3(posicionEnemigo, 8, 0);
             tiempoUnSegundo = 0;
         }  

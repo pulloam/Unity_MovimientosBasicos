@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class Enemigo : MonoBehaviour
 {
+    public AudioSource audioExplosion;
+
+    private Rigidbody2D rb;
     private bool destruir, rotar;
     // Start is called before the first frame update
     void Start(){
@@ -14,8 +17,9 @@ public class Enemigo : MonoBehaviour
         //} else {
         //    destruir = false;
         //}
-        GetComponent<Rigidbody2D>().gravityScale = Random.Range(0.1f,3);
-        transform.localScale = new Vector3(Random.Range(1,3), Random.Range(1,3), 0);        
+        rb = GetComponent<Rigidbody2D>();
+        rb.gravityScale = Random.Range(0.1f,3);
+        transform.localScale = new Vector3(Random.Range(1,3), Random.Range(1,3), 0); 
     }
 
     // Update is called once per frame
@@ -32,7 +36,8 @@ public class Enemigo : MonoBehaviour
     private void OnCollisionEnter2D(Collision2D collision) {
         if(collision.gameObject.name == "Piso" || collision.gameObject.tag == "Enemigo") {
             if (destruir) {
-                Destroy(gameObject, 2f);
+                audioExplosion.PlayDelayed(0.2f);
+                Destroy(gameObject, 1f);   
             }
             rotar = false;
         }
